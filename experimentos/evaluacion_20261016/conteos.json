@@ -1,0 +1,64 @@
+{
+  "PielSana": {
+    "entradas": 782,
+    "unicas_pixeles": 781,
+    "grupos_sin_conflicto": 725,
+    "excluidas_cabras": 0,
+    "excluidas_conflicto": 5,
+    "entrenamiento": 744,
+    "prueba": 30,
+    "fuentes_verificadas": {
+      "sin metadatos": 782
+    }
+  },
+  "PielConLSD": {
+    "entradas": 621,
+    "unicas_pixeles": 322,
+    "grupos_sin_conflicto": 267,
+    "excluidas_cabras": 0,
+    "excluidas_conflicto": 13,
+    "entrenamiento": 279,
+    "prueba": 30,
+    "fuentes_verificadas": {
+      "sin metadatos": 621
+    }
+  },
+  "NoValido": {
+    "entradas": 648,
+    "unicas_pixeles": 648,
+    "grupos_sin_conflicto": 645,
+    "excluidas_cabras": 0,
+    "excluidas_conflicto": 0,
+    "entrenamiento": 618,
+    "prueba": 30,
+    "fuentes_verificadas": {
+      "sin metadatos": 648
+    }
+  },
+  "OjoRosado": {
+    "entradas": 654,
+    "unicas_pixeles": 580,
+    "grupos_sin_conflicto": 146,
+    "excluidas_cabras": 156,
+    "excluidas_conflicto": 0,
+    "entrenamiento": 347,
+    "prueba": 30,
+    "fuentes_verificadas": {
+      "sapipise.v1i.folder": 498,
+      "kambingpise.v1i.folder": 156
+    }
+  },
+  "OjoSano": {
+    "entradas": 546,
+    "unicas_pixeles": 546,
+    "grupos_sin_conflicto": 86,
+    "excluidas_cabras": 285,
+    "excluidas_conflicto": 0,
+    "entrenamiento": 168,
+    "prueba": 30,
+    "fuentes_verificadas": {
+      "sapipise.v1i.folder": 261,
+      "kambingpise.v1i.folder": 285
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "proyecto": {
+    "nombre": "Bovino · Piel y ojos",
+    "subtitulo": "Tamizaje visual de piel y ojos para apoyar la observación del ganado",
+    "aviso": "Herramienta de apoyo, no reemplaza el diagnóstico veterinario",
+    "guia_captura": "Para piel, fotografía la vaca de costado con la piel visible. Para ojos, toma un primer plano nítido del ojo completo, sin flash directo ni reflejos fuertes. Usa buena luz y analiza una zona por fotografía.",
+    "zona_horaria": "America/La_Paz"
+  },
+  "rutas": {
+    "originales": "01_datos/originales",
+    "division": "02_preparacion/salida",
+    "modelo": "03_modelo",
+    "etiquetas": "03_modelo/labels.txt",
+    "evaluacion": "04_evaluacion/resultados",
+    "alertas": "05_app/alertas"
+  },
+  "modelo": {
+    "adaptador": "savedmodel",
+    "firma": "serving_default",
+    "entrada": null,
+    "salida": null,
+    "tipo_salida": "probabilidades",
+    "preprocesamiento": {
+      "ancho": 224,
+      "alto": 224,
+      "ajuste": "recorte_central",
+      "normalizacion": "menos_uno_a_uno",
+      "confirmado": false
+    }
+  },
+  "datos": {
+    "extensiones": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".bmp",
+      ".webp"
+    ],
+    "razon_desbalance": 1.5,
+    "prueba_por_clase": 30,
+    "semilla": 42,
+    "prueba_independiente_confirmada": false
+  },
+  "evaluacion": {
+    "brecha_alerta": 0.1,
+    "exactitud_baja": 0.7
+  },
+  "decision": {
+    "umbral": 0.7,
+    "margen": 0.15,
+    "motivos": {
+      "invalida": "La clase de rechazo obtuvo la puntuación mayor.",
+      "incierto": "No se alcanzó el umbral de confianza o el margen mínimo entre clases.",
+      "aceptada": "Se alcanzaron el umbral y el margen configurados."
+    }
+  },
+  "validacion": {
+    "ancho_minimo": 224,
+    "alto_minimo": 224,
+    "brillo_minimo": 35,
+    "varianza_laplaciano_minima": 45,
+    "lado_medicion": 512,
+    "max_megabytes": 12,
+    "max_pixeles": 24000000,
+    "formatos_permitidos": ["JPEG", "PNG", "WEBP", "BMP"],
+    "mensajes": {
+      "pequena": "La fotografía es muy pequeña. Usa una imagen de mayor resolución.",
+      "oscura": "La fotografía es muy oscura. Busca luz uniforme sin flash directo.",
+      "borrosa": "La fotografía parece borrosa o con poco detalle. Enfoca la zona de piel o el ojo y evita movimiento."
+    }
+  },
+  "interfaz": {
+    "ancho": "wide",
+    "historial_maximo": 100,
+    "color_acento": "#24664D",
+    "color_fondo": "#FAF9F5",
+    "color_texto": "#243B30",
+    "radio_px": 12,
+    "fuentes_imagen": [
+      "Subir fotografía",
+      "Tomar fotografía"
+    ],
+    "tipos_archivo": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp",
+      "bmp"
+    ],
+    "textos": {
+      "entrada": "Una imagen, una observación",
+      "cargar": "Selecciona una fotografía de piel o del ojo bovino",
+      "camara": "Toma una fotografía con buena luz",
+      "permiso_camara": "Si la cámara no aparece, habilita su permiso en el navegador. En celular, usa HTTPS; también puedes subir una foto.",
+      "analizar": "Analizar fotografía",
+      "cargando": "Cargando el modelo y analizando la imagen…",
+      "sin_imagen": "Prepara una fotografía para comenzar. El resultado aparecerá junto a la imagen.",
+      "barras": "Probabilidades por clase",
+      "detalle": "Cómo se tomó esta decisión",
+      "historial": "Historial de esta sesión",
+      "borrar": "Borrar historial",
+      "sin_historial": "Todavía no hay resultados en esta sesión.",
+      "ficha": "Información general de la clase",
+      "modelo_pendiente": "Falta el SavedModel o labels.txt. Colócalos en 03_modelo y ejecuta el inspector antes de analizar.",
+      "preprocesamiento_pendiente": "Tamaño y tipo de entrada comprobados. Se usa el preprocesamiento estándar de Teachable Machine; compara las predicciones con tu exportación para verificar normalización y recorte.",
+      "origen": "Origen de la fotografía",
+      "error_tamano": "El archivo supera el tamaño permitido por la configuración.",
+      "error_lectura": "No se pudo leer la fotografía",
+      "error_analisis": "No se pudo completar el análisis",
+      "arrastrar": "Arrastra aquí una fotografía",
+      "explorar": "Explorar archivos",
+      "pestana_analisis": "Analizar imagen",
+      "pestana_modelo": "Modelo y evaluación",
+      "titulo_modelo": "Conoce el modelo que estás utilizando",
+      "descripcion_modelo": "Conoce las clases que reconoce, cómo se prepara la imagen y las reglas utilizadas para mostrar el resultado.",
+      "modelo_activo": "Modelo activo",
+      "clases_modelo": "Clases que reconoce",
+      "preprocesamiento_modelo": "Preparación de la imagen",
+      "reglas_modelo": "Cómo decide el clasificador",
+      "evaluacion_modelo": "Evaluación del modelo",
+      "evaluacion_pendiente": "Todavía no hay una evaluación compatible con el modelo actual. La exactitud y la matriz de confusión aparecerán después de ejecutar la fase de evaluación con datos reales.",
+      "datos_entrenamiento": "El SavedModel no incluye las cantidades de imágenes utilizadas para entrenar ni las curvas de aprendizaje. Esos datos deben conservarse desde el entrenamiento.",
+      "inspeccion_pendiente": "No hay una inspección guardada para esta versión. Ejecuta 03_modelo/inspeccionar_modelo.py para verificar la entrada y la salida reales.",
+      "alcance_analisis": "Cada foto recibe una sola clase. Un resultado de piel sana no evalúa los ojos, y uno de ojo sano no descarta problemas en la piel.",
+      "clase_sugerida": "Clase con mayor puntuación"
+    }
+  },
+  "estados": {
+    "bajo": {
+      "titulo": "Riesgo visual bajo",
+      "icono": "✓",
+      "color": "#24664D",
+      "fondo": "#EAF3EC"
+    },
+    "incierto": {
+      "titulo": "No estoy seguro",
+      "icono": "?",
+      "color": "#795500",
+      "fondo": "#FFF4CF",
+      "recomendacion": "Repite la foto con buena luz y la zona de interés visible. Si observas lesiones, cambios en el ojo o malestar, consulta a un veterinario."
+    },
+    "alto": {
+      "titulo": "Riesgo visual alto",
+      "icono": "!",
+      "color": "#AD2929",
+      "fondo": "#FCECE8"
+    },
+    "invalida": {
+      "titulo": "Imagen no válida",
+      "icono": "↻",
+      "color": "#795500",
+      "fondo": "#FFF4CF",
+      "recomendacion": "Necesitamos otra fotografía para realizar el tamizaje."
+    }
+  },
+  "clases": [
+    {
+      "etiqueta": "PielSana",
+      "carpeta": "piel_sana",
+      "rol": "saludable",
+      "riesgo": "bajo",
+      "recomendacion": "La imagen se parece a la clase de piel sana. Mantén la observación del animal; una foto no descarta enfermedad. Consulta si notas cambios.",
+      "nombre": "Piel sana"
+    },
+    {
+      "etiqueta": "PielConLSD",
+      "carpeta": "lumpy_skin",
+      "rol": "enfermedad",
+      "riesgo": "alto",
+      "recomendacion": "La imagen presenta similitud con la clase de dermatosis nodular contagiosa. Solicita valoración veterinaria y orientación de la autoridad sanitaria local. La imagen no confirma la enfermedad.",
+      "ficha": {
+        "Qué es": "Una enfermedad viral que afecta a bovinos y puede causar nódulos en la piel.",
+        "Signos visibles": "Bultos firmes en la piel, lesiones y, a veces, hinchazón. Estos cambios pueden tener otras causas y requieren valoración veterinaria.",
+        "Cómo se contagia": "Se transmite principalmente mediante artrópodos que se alimentan de sangre. El movimiento de animales infectados contribuye a su dispersión.",
+        "Prevención": "La bioseguridad, la detección temprana, el control de movimientos y la vacunación bajo programas oficiales ayudan al control. Consulta al veterinario o a la autoridad sanitaria sobre las medidas que correspondan.",
+        "nota_revision": "Verificar esta ficha con fuentes veterinarias y orientación sanitaria local antes de la entrega académica.",
+        "fuentes": [
+          {
+            "titulo": "WOAH · Lumpy Skin Disease",
+            "url": "https://www.woah.org/en/disease/lumpy-skin-disease/"
+          }
+        ]
+      },
+      "nombre": "Lumpy skin (dermatosis nodular contagiosa)"
+    },
+    {
+      "etiqueta": "NoValido",
+      "carpeta": "imagen_no_valida",
+      "rol": "invalida",
+      "riesgo": "invalida",
+      "recomendacion": "La imagen no corresponde a una observación válida de piel u ojo bovino. Repite la fotografía siguiendo la guía.",
+      "nombre": "Imagen no válida"
+    },
+    {
+      "etiqueta": "OjoRosado",
+      "carpeta": "ojo_rosado",
+      "rol": "enfermedad",
+      "riesgo": "alto",
+      "nombre": "Queratoconjuntivitis infecciosa bovina",
+      "recomendacion": "La imagen presenta similitud con la clase de queratoconjuntivitis infecciosa bovina. Solicita valoración veterinaria pronta, especialmente si el animal mantiene el ojo cerrado, presenta lagrimeo o cambios de aspecto. La fotografía no confirma la causa del problema ni indica un tratamiento.",
+      "ficha": {
+        "Qué es": "La queratoconjuntivitis infecciosa bovina es un problema ocular contagioso y doloroso. La etiqueta del modelo representa similitud visual, no un diagnóstico confirmado.",
+        "Signos visibles": "Puede haber lagrimeo, parpadeo, ojo entrecerrado y cambios de transparencia en la superficie del ojo. Otros problemas oculares pueden verse parecidos.",
+        "Cómo se contagia": "Las moscas pueden contribuir a la transmisión entre animales.",
+        "Prevención": "Revisar el ganado, reducir irritantes como polvo y pasto alto y acordar el control de moscas con el veterinario puede ayudar a reducir riesgos.",
+        "nota_revision": "Verificar esta ficha con fuentes veterinarias y orientación local antes de la entrega académica. No usar el resultado para elegir medicamentos ni dosis.",
+        "fuentes": [
+          {
+            "titulo": "MSD Veterinary Manual · Queratoconjuntivitis infecciosa bovina",
+            "url": "https://www.msdvetmanual.com/eye-diseases-and-disorders/infectious-keratoconjunctivitis/infectious-keratoconjunctivitis-in-cattle-and-small-ruminants"
+          }
+        ]
+      }
+    },
+    {
+      "etiqueta": "OjoSano",
+      "carpeta": "ojo_sano",
+      "rol": "saludable",
+      "riesgo": "bajo",
+      "nombre": "Ojo sano",
+      "recomendacion": "La imagen se parece a la clase de ojo sano. Este resultado solo se refiere al aspecto del ojo fotografiado y no descarta otros problemas. Mantén la observación y consulta si notas lagrimeo, dolor o cambios."
+    }
+  ],
+  "camara": {
+    "dispositivo": 0,
+    "fps_analisis": 2,
+    "ventana": 8,
+    "votos_necesarios": 6,
+    "espera_alertas_segundos": 30,
+    "estados_alerta": [
+      "alto"
+    ],
+    "ancho_ventana": 1100,
+    "alto_ventana": 760,
+    "titulo_ventana": "Tamizaje bovino · Q para salir"
+  }
+}
